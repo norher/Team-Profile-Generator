@@ -8,6 +8,9 @@ const Intern = require('./lib/Intern');
 
 const generateHTML = require('./src/generateHTML');
 
+const output_dir = path.resolve(__dirname, 'dist');
+const outputPath = path.join(output_dir, 'myteam.html');
+
 
 let myTeam = [];
 
