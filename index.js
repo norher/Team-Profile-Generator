@@ -6,10 +6,7 @@ const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 
-const generateHTML = require('./src/generateHTML');
-
-const output_dir = path.resolve(__dirname, 'dist');
-const outputPath = path.join(output_dir, 'myteam.html');
+const htmlFile = require('./src/generateHTML');
 
 
 let myTeam = [];
@@ -30,25 +27,25 @@ const getManager = () => {
         {
             type: "input",
             name: "managerName",
-            message: "Please the name of the manager",
+            message: "Please enter the name of the manager",
             validate: validation,
         },
         {
             type: "input",
             name: "managerId",
-            message: "Please the ID number of the manager",
+            message: "Please enter the ID number of the manager",
             validate: validation,
         },
         {
             type: "input",
             name: "managerEmail",
-            message: "Please the email of the manager",
+            message: "Please enter the email of the manager",
             validate: validation,
         },
         {
             type: "input",
             name: "managerOffice",
-            message: "Please the office number of the manager",
+            message: "Please enter the office number of the manager",
             validate: validation,
         },
     ])
@@ -56,11 +53,12 @@ const getManager = () => {
         console.log(data);
         const manager = new Manager(
             data.managerName,
-            data.managerID,
+            data.managerId,
             data.managerEmail,
             data.managerOffice);
             console.log('manager');
             myTeam.push(manager);
+            console.log(myTeam);
             addTeamMember();
     });
 }
@@ -71,7 +69,7 @@ function addTeamMember() {
             type: "list",
             name: "employeeType",
             message: "Who would you like to add next?",
-            choices: ["Engineer", "Intern", "None"],
+            choices: ["Engineer", "Intern", "Manager", "None"],
         },
     ])
     .then((data) => {
@@ -79,6 +77,8 @@ function addTeamMember() {
             getEngineer();
         } else if (data.employeeType === "Intern") {
             getIntern();
+        } else if (data.employeeType === "Manager") {
+            getManager();
         } else {
             generateHTML();
         }
@@ -121,6 +121,7 @@ function getEngineer() {
         );
         console.log(engineer);
         myTeam.push(engineer);
+        console.log(myTeam);
         addTeamMember();
     });
 }
@@ -156,11 +157,19 @@ function getIntern() {
             data.internName,
             data.internId,
             data.internEmail,
-            data.internGithub,
+            data.internSchool,
         );
         console.log(intern);
         myTeam.push(intern);
+        console.log(myTeam);
         addTeamMember();
+    });
+}
+
+function generateHTML() {
+    fs.writeFileSync('./dist/myteam.html', htmlFile(myTeam), (err) => {
+        if (err) {console.log(err);}
+        else {console.log('team profile Generated');}
     });
 }
 
