@@ -1,17 +1,15 @@
 const Engineer = require('../lib/Engineer');
 
-describe("Engineer test", () => {
-    describe('Can Create a new Engineer', () => {
+describe("Engineer", () => {
+    describe('Can Create a new Engineer that includes name, id, email and github', () => {
         it("should create new Engineer", () => {
-            const engineer = new Engineer();
-            expect(typeof(engineer).toBe('object'));
-        })
+            const engineer = new Engineer('Norman', 1, 'norman.herrera@ymail.com', 'norher');
+            expect(engineer).toEqual({
+                name: 'Norman',
+                id: 1,
+                email: 'norman.herrera@ymail.com',
+                github: 'norher'
+            });
+        });
     });
-    describe("can use constructor", () => {
-        it("should set an email via constructor", () => {
-            const email = "normanh.dev@gmail.com";
-            const engineer = new Engineer('norms', 1, email)
-            expect(engineer.email).toBe(email);
-        })
-    })
-})
+});
