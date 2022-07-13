@@ -1,6 +1,5 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const path = require('path');
 
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
@@ -69,7 +68,7 @@ function addTeamMember() {
             type: "list",
             name: "employeeType",
             message: "Who would you like to add next?",
-            choices: ["Engineer", "Intern", "Manager", "None"],
+            choices: ["Engineer", "Intern", "None"],
         },
     ])
     .then((data) => {
