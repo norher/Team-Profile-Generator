@@ -77,8 +77,6 @@ function addTeamMember() {
             getEngineer();
         } else if (data.employeeType === "Intern") {
             getIntern();
-        } else if (data.employeeType === "Manager") {
-            getManager();
         } else {
             generateHTML();
         }
